@@ -1,9 +1,10 @@
-Breacan
-=======
+<p align="center">
+<img src="https://d262ilb51hltx0.cloudfront.net/max/2000/1*ryU77MsLt5tnp3ow8kqELA.png">
+<strong>Breacan</strong>: Simple Ruby wrapper for Slack API.
+</p>
 
-![breacan](http://www.lindaclifford.com/Images/CorkGreatKiltA.jpg)
-
-Simple Ruby wrapper for Slack API.
+[![ruby gem](https://img.shields.io/gem/v/breacan.svg?style=flat-square)][gem]
+[gem]: https://rubygems.org/gems/breacan
 
 Installation
 ------------
