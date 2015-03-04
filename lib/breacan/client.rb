@@ -95,7 +95,11 @@ module Breacan
         options
       )
 
-      response.data
+      simplize_body response.data
+    end
+
+    def simplize_body(body)
+      body.to_hash.keys.count == 1 ? body[body.to_hash.keys.last] : body
     end
 
     def last_response

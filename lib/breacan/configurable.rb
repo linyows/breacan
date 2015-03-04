@@ -1,4 +1,4 @@
-require 'breacan/response/raise_error'
+require 'breacan/response/custom'
 
 module Breacan
   module Configurable
@@ -44,8 +44,8 @@ module Breacan
       @connection_options = { headers: { accept: media_type, user_agent: user_agent } }
       @proxy              = ENV['BREACAN_PROXY']
       @middleware         = Faraday::RackBuilder.new { |builder|
-          builder.use Breacan::Response::RaiseError
           builder.adapter Faraday.default_adapter
+          builder.response :breacan_custom
         }
       self
     end

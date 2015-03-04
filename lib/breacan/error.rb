@@ -1,7 +1,7 @@
 module Breacan
   class Error < StandardError
-    def self.from_response(response)
-      if klass = case response[:status].to_i
+    def self.from_body(body)
+      if klass = case body[:error]
         when 400      then Breacan::BadRequest
         when 401      then Breacan::Unauthorized
         when 403      then Breacan::Forbidden

@@ -40,6 +40,7 @@ module Breacan
       def channels_list
         get 'channels.list'
       end
+      alias_method :channels, :channels_list
 
       def channels_mark(args)
         get 'channels.mark', query: args
