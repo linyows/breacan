@@ -26,7 +26,22 @@ Or install it yourself as:
 Usage
 -----
 
-TODO: Write usage instructions here
+example:
+
+```ruby
+require 'breacan'
+Breacan.access_token = 'xoxp-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'
+Breacan.channels
+=> [{:id=>"C03QXXXX",
+    :name=>"hello",
+    :is_channel=>true,
+    :created=>1424735886,
+    :creator=>"U03PXXXX",
+    :is_archived=>false,
+    :is_general=>false,
+    :is_member=>false,
+    :members=> ["U0NLXXXX",...
+```
 
 Contributing
 ------------
