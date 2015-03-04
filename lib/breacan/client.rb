@@ -1,17 +1,37 @@
 require 'sawyer'
 require 'breacan/configurable'
 require 'breacan/authentication'
-require 'breacan/client/oauth'
+require 'breacan/client/api'
+require 'breacan/client/auth'
 require 'breacan/client/channels'
 require 'breacan/client/chat'
+require 'breacan/client/emoji'
+require 'breacan/client/files'
+require 'breacan/client/groups'
+require 'breacan/client/im'
+require 'breacan/client/oauth'
+require 'breacan/client/rtm'
+require 'breacan/client/search'
+require 'breacan/client/star'
+require 'breacan/client/users'
 
 module Breacan
   class Client
     include Breacan::Authentication
     include Breacan::Configurable
-    include Breacan::Client::OAuth
+    include Breacan::Client::Api
+    include Breacan::Client::Auth
     include Breacan::Client::Channels
     include Breacan::Client::Chat
+    include Breacan::Client::Emoji
+    include Breacan::Client::Files
+    include Breacan::Client::Groups
+    include Breacan::Client::Im
+    include Breacan::Client::OAuth
+    include Breacan::Client::Rtm
+    include Breacan::Client::Search
+    include Breacan::Client::Star
+    include Breacan::Client::Users
 
     CONVENIENCE_HEADERS = Set.new(%i(accept content_type))
 
