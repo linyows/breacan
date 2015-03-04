@@ -1,16 +1,16 @@
 module Breacan
   class Client
     module Chat
-      def chat_delete(*args)
-        delete 'chat.delete', args
+      def chat_delete(args)
+        get 'chat.delete', query: args
       end
 
-      def chat_post_message(*args)
-        get 'chat.postMessage', args
+      def chat_post_message(args)
+        get 'chat.postMessage', query: args
       end
 
-      def chat_update(*args)
-        get 'chat.update', args
+      def chat_update(args)
+        get 'chat.update', query: args
       end
     end
   end

@@ -5,12 +5,12 @@ module Breacan
         get 'channels.list'
       end
 
-      def channels_info(*args)
-        get 'channels.info', args
+      def channels_info(args)
+        get 'channels.info', query: args
       end
 
-      def channels_history(*args)
-        get 'channels.history', args
+      def channels_history(args)
+        get 'channels.history', query: args
       end
 
       def channels_info_by_name(name)

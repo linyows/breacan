@@ -52,7 +52,6 @@ module Breacan
     def agent
       @agent ||= Sawyer::Agent.new(api_endpoint, sawyer_options) do |http|
         http.headers[:accept] = media_type
-        http.headers[:content_type] = media_type
         http.headers[:user_agent] = user_agent
       end
     end
@@ -66,10 +65,21 @@ module Breacan
         if accept = data.delete(:accept)
           options[:headers][:accept] = accept
         end
+        options[:query][:token] = access_token
       end
-      api_path = URI::Parser.new.escape("#{path.to_s}?token=#{@access_token}")
-      @last_response = response = agent.call(method, api_path, data, options)
+
+      @last_response = response = agent.call(
+        method,
+        URI::Parser.new.escape(path.to_s),
+        data,
+        options
+      )
+
       response.data
+    end
+
+    def last_response
+      @last_response if defined? @last_response
     end
 
     def boolean_from_response(method, path, options = {})
