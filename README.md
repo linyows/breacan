@@ -41,6 +41,8 @@ Breacan.channels
     :is_general=>false,
     :is_member=>false,
     :members=> ["U0NLXXXX",...
+Breacan.channels_info_by_name('hello').id
+=> "C03QXXXX"
 ```
 
 Contributing

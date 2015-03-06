@@ -35,6 +35,12 @@ module Breacan
     end
 
     def reset!
+      builder = if defined? Faraday::RackBuilder
+          Faraday::RackBuilder
+        else
+          Faraday::Builder
+        end
+
       @access_token       = ENV['BREACAN_ACCESS_TOKEN']
       @team               = ENV['BREACAN_TEAM']
       @api_endpoint       = ENV['BREACAN_API_ENDPOINT'] || 'https://slack.com/api/'
@@ -43,10 +49,11 @@ module Breacan
       @media_type         = 'application/json'
       @connection_options = { headers: { accept: media_type, user_agent: user_agent } }
       @proxy              = ENV['BREACAN_PROXY']
-      @middleware         = Faraday::RackBuilder.new { |builder|
-          builder.adapter Faraday.default_adapter
-          builder.response :breacan_custom
-        }
+      @middleware         = builder.new { |c|
+        c.adapter Faraday.default_adapter
+        c.response :breacan_custom
+      }
+
       self
     end
     alias setup reset!
