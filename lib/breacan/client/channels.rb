@@ -59,8 +59,7 @@ module Breacan
       end
 
       def channels_info_by_name(name)
-        res = channels_list
-        res.channels.find { |ch| ch['name'] == name } if res.ok
+        channels_list.find { |ch| ch['name'] == name }
       end
     end
   end
