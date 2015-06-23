@@ -58,8 +58,7 @@ module Breacan
       end
 
       def groups_info_by_name(name)
-        res = groups_list
-        res.groups.find { |ch| ch['name'] == name } if res.ok
+        groups_list.find { |ch| ch['name'] == name }
       end
     end
   end
