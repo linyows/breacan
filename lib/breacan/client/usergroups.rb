@@ -16,8 +16,8 @@ module Breacan
       end
       alias_method :enable_usergroup, :usergroups_enable
 
-      def usergroups_list(args = {})
-        get 'usergroups.list', query: args
+      def usergroups_list(id, options = {})
+        get 'usergroups.list', query: { usergroup: id }.merge(options)
       end
       alias_method :usergroups, :usergroups_list
 
