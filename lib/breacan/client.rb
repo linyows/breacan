@@ -14,6 +14,7 @@ require 'breacan/client/rtm'
 require 'breacan/client/search'
 require 'breacan/client/star'
 require 'breacan/client/users'
+require 'breacan/client/usergroups'
 
 module Breacan
   class Client
@@ -32,6 +33,7 @@ module Breacan
     include Breacan::Client::Search
     include Breacan::Client::Star
     include Breacan::Client::Users
+    include Breacan::Client::Usergroups
 
     CONVENIENCE_HEADERS = Set.new(%i(accept content_type))
 
