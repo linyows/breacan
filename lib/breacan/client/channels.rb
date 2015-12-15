@@ -13,13 +13,10 @@ module Breacan
         get 'channels.history', query: args
       end
 
-      def channels_info(args)
-        get 'channels.info', query: args
+      def channels_info(id, options)
+        get 'channels.info', query: { channel: id }.merge(options)
       end
-
-      def channels_info(args)
-        get 'channels.info', query: args
-      end
+      alias_method :channel, :channels_info
 
       def channels_invite(args)
         get 'channels.invite', query: args
@@ -45,21 +42,25 @@ module Breacan
       def channels_mark(args)
         get 'channels.mark', query: args
       end
+
       def channels_rename(args)
         get 'channels.rename', query: args
       end
+
       def channels_set_purpose(args)
         get 'channels.setPurpose', query: args
       end
+
       def channels_set_topic(args)
         get 'channels.setTopic', query: args
       end
+
       def channels_unarchive(args)
         get 'channels.unarchive', query: args
       end
 
-      def channels_info_by_name(name)
-        channels_list.find { |ch| ch['name'] == name }
+      def channel_by_name(name)
+        channels.find { |ch| ch.name == name }
       end
     end
   end
