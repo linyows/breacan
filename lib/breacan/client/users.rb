@@ -6,8 +6,8 @@ module Breacan
       end
       alias_method :user_presence, :users_get_presence
 
-      def users_info(id, args)
-        get 'users.info', query: { user: id }.merge(args)
+      def users_info(id, options = {})
+        get 'users.info', query: { user: id }.merge(options)
       end
       alias_method :user, :users_info
 
