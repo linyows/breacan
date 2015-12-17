@@ -6,7 +6,7 @@ module Breacan
       end
 
       def groups_create(args)
-        get 'groups.create', query: args
+        post 'groups.create', query: args
       end
 
       def groups_history(args)
@@ -17,24 +17,20 @@ module Breacan
         get 'groups.info', query: args
       end
 
-      def groups_info(args)
-        get 'groups.info', query: args
-      end
-
       def groups_invite(args)
-        get 'groups.invite', query: args
+        post 'groups.invite', query: args
       end
 
       def groups_join(args)
-        get 'groups.join', query: args
+        post 'groups.join', query: args
       end
 
       def groups_kick(args)
-        get 'groups.kick', query: args
+        post 'groups.kick', query: args
       end
 
       def groups_leave(args)
-        get 'groups.leave', query: args
+        post 'groups.leave', query: args
       end
 
       def groups_list
@@ -42,19 +38,23 @@ module Breacan
       end
 
       def groups_mark(args)
-        get 'groups.mark', query: args
+        post 'groups.mark', query: args
       end
+
       def groups_rename(args)
-        get 'groups.rename', query: args
+        post 'groups.rename', query: args
       end
+
       def groups_set_purpose(args)
-        get 'groups.setPurpose', query: args
+        post 'groups.setPurpose', query: args
       end
+
       def groups_set_topic(args)
-        get 'groups.setTopic', query: args
+        post 'groups.setTopic', query: args
       end
+
       def groups_unarchive(args)
-        get 'groups.unarchive', query: args
+        post 'groups.unarchive', query: args
       end
 
       def groups_info_by_name(name)

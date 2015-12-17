@@ -2,7 +2,7 @@ module Breacan
   class Client
     module Files
       def files_delete(args)
-        get 'files.delete', query: args
+        post 'files.delete', query: args
       end
 
       def files_info(args)
