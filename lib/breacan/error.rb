@@ -22,6 +22,10 @@ module Breacan
       end
     end
 
+    def self.from_body(response, body)
+      Breacan::BadRequest.new(response) unless body[:ok]
+    end
+
     def initialize(response = nil)
       @response = response
       super(build_error_message)

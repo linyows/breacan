@@ -17,6 +17,10 @@ module Breacan
         if body[:ok]
           res[:body].gsub!('"ok":true,', '')
         end
+
+        if error = Breacan::Error.from_body(res, body)
+          raise error
+        end
       end
     end
 
