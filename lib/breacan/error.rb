@@ -82,7 +82,7 @@ module Breacan
     end
 
     def redact_url(url_string)
-      %w[client_secret access_token].each do |token|
+      %w[token client_secret access_token].each do |token|
         url_string.gsub!(/#{token}=\S+/, "#{token}=(redacted)") if url_string.include? token
       end
       url_string
