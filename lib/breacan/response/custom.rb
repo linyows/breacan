@@ -8,7 +8,7 @@ module Breacan
       private
 
       def on_complete(res)
-        if error = Breacan::Error.from_body(res)
+        if error = Breacan::Error.from_response(res)
           raise error
         end
 
