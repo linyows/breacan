@@ -1,6 +1,5 @@
 require 'faraday'
 require 'breacan/error'
-require 'json'
 
 module Breacan
   module Response
@@ -14,8 +13,8 @@ module Breacan
 
         return if res[:body].empty?
 
-        body = JSON.load(res[:body])
-        if body['ok']
+        body = Sawyer::Agent.serializer.decode(res[:body])
+        if body[:ok]
           res[:body].gsub!('"ok":true,', '')
         end
       end
