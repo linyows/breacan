@@ -1,6 +1,5 @@
 require 'faraday'
 require 'breacan/error'
-require 'json'
 
 module Breacan
   module Response
@@ -8,15 +7,19 @@ module Breacan
       private
 
       def on_complete(res)
-        if error = Breacan::Error.from_body(res)
+        if error = Breacan::Error.from_response(res)
           raise error
         end
 
         return if res[:body].empty?
 
-        body = JSON.load(res[:body])
-        if body['ok']
+        body = Sawyer::Agent.serializer.decode(res[:body])
+        if body[:ok]
           res[:body].gsub!('"ok":true,', '')
+        end
+
+        if error = Breacan::Error.from_body(res, body)
+          raise error
         end
       end
     end

@@ -1,24 +1,29 @@
 module Breacan
   class Error < StandardError
-    def self.from_body(body)
-      if klass = case body[:error]
-        when 400      then Breacan::BadRequest
-        when 401      then Breacan::Unauthorized
-        when 403      then Breacan::Forbidden
-        when 404      then Breacan::NotFound
-        when 406      then Breacan::NotAcceptable
-        when 409      then Breacan::Conflict
-        when 415      then Breacan::UnsupportedMediaType
-        when 422      then Breacan::UnprocessableEntity
-        when 400..499 then Breacan::ClientError
-        when 500      then Breacan::InternalServerError
-        when 501      then Breacan::NotImplemented
-        when 502      then Breacan::BadGateway
-        when 503      then Breacan::ServiceUnavailable
-        when 500..599 then Breacan::ServerError
-        end
+    def self.from_response(response)
+      status = response[:status].to_i
+      if klass = case status
+                 when 400      then Breacan::BadRequest
+                 when 401      then Breacan::Unauthorized
+                 when 403      then Breacan::Forbidden
+                 when 404      then Breacan::NotFound
+                 when 406      then Breacan::NotAcceptable
+                 when 409      then Breacan::Conflict
+                 when 415      then Breacan::UnsupportedMediaType
+                 when 422      then Breacan::UnprocessableEntity
+                 when 400..499 then Breacan::ClientError
+                 when 500      then Breacan::InternalServerError
+                 when 501      then Breacan::NotImplemented
+                 when 502      then Breacan::BadGateway
+                 when 503      then Breacan::ServiceUnavailable
+                 when 500..599 then Breacan::ServerError
+                 end
         klass.new(response)
       end
+    end
+
+    def self.from_body(response, body)
+      Breacan::BadRequest.new(response) unless body[:ok]
     end
 
     def initialize(response = nil)
@@ -77,7 +82,7 @@ module Breacan
     end
 
     def redact_url(url_string)
-      %w[client_secret access_token].each do |token|
+      %w[token client_secret access_token].each do |token|
         url_string.gsub!(/#{token}=\S+/, "#{token}=(redacted)") if url_string.include? token
       end
       url_string
