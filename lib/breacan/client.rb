@@ -101,7 +101,20 @@ module Breacan
     end
 
     def simplize_body(body)
-      body.to_hash.keys.count == 1 ? body[body.to_hash.keys.last] : body
+      keys = body.to_hash.keys.dup
+
+      @cache_ts = if keys.include?(:cache_ts)
+          keys.delete(:cache_ts)
+          body.cache_ts
+        else
+          nil
+        end
+
+      keys.count == 1 ? body[keys.last] : body
+    end
+
+    def cache_ts
+      @cache_ts if defined? @cache_ts
     end
 
     def last_response
