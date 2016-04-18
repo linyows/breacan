@@ -6,7 +6,7 @@ module Breacan
       end
 
       def channels_create(args)
-        post 'channels.create', query: args
+        get 'channels.create', query: args
       end
 
       def channels_history(args)
@@ -19,19 +19,19 @@ module Breacan
       alias_method :channel, :channels_info
 
       def channels_invite(args)
-        post 'channels.invite', query: args
+        get 'channels.invite', query: args
       end
 
       def channels_join(args)
-        post 'channels.join', query: args
+        get 'channels.join', query: args
       end
 
       def channels_kick(args)
-        post 'channels.kick', query: args
+        get 'channels.kick', query: args
       end
 
       def channels_leave(args)
-        post 'channels.leave', query: args
+        get 'channels.leave', query: args
       end
 
       def channels_list
@@ -40,23 +40,23 @@ module Breacan
       alias_method :channels, :channels_list
 
       def channels_mark(args)
-        post 'channels.mark', query: args
+        get 'channels.mark', query: args
       end
 
       def channels_rename(args)
-        post 'channels.rename', query: args
+        get 'channels.rename', query: args
       end
 
       def channels_set_purpose(args)
-        post 'channels.setPurpose', query: args
+        get 'channels.setPurpose', query: args
       end
 
       def channels_set_topic(args)
-        post 'channels.setTopic', query: args
+        get 'channels.setTopic', query: args
       end
 
       def channels_unarchive(args)
-        post 'channels.unarchive', query: args
+        get 'channels.unarchive', query: args
       end
 
       def channel_by_name(name)

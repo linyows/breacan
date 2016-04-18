@@ -2,7 +2,7 @@ module Breacan
   class Client
     module Im
       def im_close(args)
-        post 'im.close', query: args
+        get 'im.close', query: args
       end
 
       def im_history(args)
@@ -14,11 +14,11 @@ module Breacan
       end
 
       def im_mark(args)
-        post 'im.mark', query: args
+        get 'im.mark', query: args
       end
 
       def im_open(args)
-        post 'im.open', query: args
+        get 'im.open', query: args
       end
     end
   end

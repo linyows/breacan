@@ -17,12 +17,12 @@ module Breacan
       alias_method :users, :users_list
 
       def users_set_active
-        post 'users.setActive'
+        get 'users.setActive'
       end
       alias_method :activate_user, :users_set_active
 
       def users_set_presence(args)
-        post 'users.setPresence', query: args
+        get 'users.setPresence', query: args
       end
       alias_method :set_user_presence, :users_set_presence
 
