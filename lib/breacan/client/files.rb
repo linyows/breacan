@@ -2,7 +2,7 @@ module Breacan
   class Client
     module Files
       def files_delete(args)
-        post 'files.delete', query: args
+        get 'files.delete', query: args
       end
 
       def files_info(args)
@@ -15,7 +15,7 @@ module Breacan
 
       def files_upload(args)
         # content_type = 'multipart/form-data'
-        # post 'files.upload', query: args
+        # get 'files.upload', query: args
       end
     end
   end
