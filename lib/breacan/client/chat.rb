@@ -6,7 +6,7 @@ module Breacan
       end
 
       def chat_post_message(args)
-        get 'chat.getMessage', query: args
+        get 'chat.postMessage', query: args
       end
 
       def chat_update(args)
