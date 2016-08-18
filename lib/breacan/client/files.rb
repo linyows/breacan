@@ -14,8 +14,24 @@ module Breacan
       end
 
       def files_upload(args)
-        # content_type = 'multipart/form-data'
-        # get 'files.upload', query: args
+        set_files_upload_builder
+        data = args[:file]
+        args.delete(:file)
+        res = post 'files.upload', query: args, file: data
+        reset_files_upload_builder
+        res
+      end
+
+      def set_files_upload_builder
+        @middleware = Faraday::RackBuilder.new do |c|
+          c.request :multipart
+          c.request :url_encoded
+          c.adapter :net_http
+        end
+      end
+
+      def reset_files_upload_builder
+        @middleware = default_builder
       end
     end
   end

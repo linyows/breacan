@@ -49,14 +49,24 @@ module Breacan
       @media_type         = 'application/json'
       @connection_options = { headers: { accept: media_type, user_agent: user_agent } }
       @proxy              = ENV['BREACAN_PROXY']
-      @middleware         = builder.new { |c|
-        c.adapter Faraday.default_adapter
-        c.response :breacan_custom
-      }
+      @middleware         = default_builder
 
       self
     end
     alias setup reset!
+
+    def default_builder
+      builder = if defined? Faraday::RackBuilder
+                  Faraday::RackBuilder
+                else
+                  Faraday::Builder
+                end
+
+      builder.new do |c|
+        c.adapter Faraday.default_adapter
+        c.response :breacan_custom
+      end
+    end
 
     def options
       Hash[Breacan::Configurable.keys.map { |key|
