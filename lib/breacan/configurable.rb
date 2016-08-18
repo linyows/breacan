@@ -12,6 +12,7 @@ module Breacan
       connection_options
       proxy
       middleware
+      serializer
     )
 
     attr_accessor(*OPTIONS_KEYS)
@@ -35,11 +36,6 @@ module Breacan
     end
 
     def reset!
-      builder = if defined? Faraday::RackBuilder
-          Faraday::RackBuilder
-        else
-          Faraday::Builder
-        end
 
       @access_token       = ENV['BREACAN_ACCESS_TOKEN']
       @team               = ENV['BREACAN_TEAM']
@@ -50,10 +46,15 @@ module Breacan
       @connection_options = { headers: { accept: media_type, user_agent: user_agent } }
       @proxy              = ENV['BREACAN_PROXY']
       @middleware         = default_builder
+      @serializer         = default_serializer
 
       self
     end
     alias setup reset!
+
+    def default_serializer
+      Sawyer::Serializer.any_json
+    end
 
     def default_builder
       builder = if defined? Faraday::RackBuilder

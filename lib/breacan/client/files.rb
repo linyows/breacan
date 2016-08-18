@@ -1,3 +1,4 @@
+
 module Breacan
   class Client
     module Files
@@ -23,6 +24,7 @@ module Breacan
       end
 
       def set_files_upload_builder
+        @serializer = Breacan::Client::Files::FileSerializer.any_json
         @middleware = Faraday::RackBuilder.new do |c|
           c.request :multipart
           c.request :url_encoded
@@ -32,6 +34,12 @@ module Breacan
 
       def reset_files_upload_builder
         @middleware = default_builder
+      end
+
+      class FileSerializer < Sawyer::Serializer
+        def encode(data)
+          data
+        end
       end
     end
   end
