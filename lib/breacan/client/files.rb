@@ -16,9 +16,13 @@ module Breacan
 
       def files_upload(args)
         set_files_upload_builder
-        data = args[:file]
-        args.delete(:file)
-        res = post 'files.upload', query: args, file: data
+        data = {}
+        if args[:file]
+          data[:file] = args[:file]
+          args.delete(:file)
+        end
+        data[:query] = args
+        res = post 'files.upload', data
         reset_files_upload_builder
         res
       end
