@@ -136,6 +136,7 @@ module Breacan
       conn_opts[:builder] = @middleware if @middleware
       conn_opts[:proxy] = @proxy if @proxy
       opts[:faraday] = Faraday.new(conn_opts)
+      opts[:serializer] = @serializer
 
       opts
     end
