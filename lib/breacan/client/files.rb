@@ -33,6 +33,7 @@ module Breacan
           c.request :multipart
           c.request :url_encoded
           c.adapter :net_http
+          c.response :breacan_custom
         end
       end
 
