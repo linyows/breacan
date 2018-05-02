@@ -3,8 +3,9 @@
 <strong>Breacan</strong>: Simple Ruby wrapper for Slack API.
 </p>
 
-[![ruby gem](https://img.shields.io/gem/v/breacan.svg?style=flat-square)][gem]
-[gem]: https://rubygems.org/gems/breacan
+<a href="https://rubygems.org/gems/breacan" title="gems"><img src="http://img.shields.io/gem/v/breacan.svg?style=flat-square"></a>
+<a href="https://travis-ci.org/linyows/breacan" title="travis"><img src="https://img.shields.io/travis/linyows/breacan.svg?style=flat-square"></a>
+<a href="https://github.com/linyows/breacan/blob/master/LICENSE" title="MIT License"><img src="https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square"></a>
 
 Installation
 ------------
@@ -58,8 +59,3 @@ Authors
 -------
 
 - [linyows](https://github.com/linyows)
-
-License
--------
-
-The MIT License (MIT)
