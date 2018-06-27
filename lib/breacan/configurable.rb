@@ -64,8 +64,8 @@ module Breacan
                 end
 
       builder.new do |c|
-        c.adapter Faraday.default_adapter
         c.response :breacan_custom
+        c.adapter Faraday.default_adapter
       end
     end
 
