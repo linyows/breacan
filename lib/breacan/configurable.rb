@@ -13,6 +13,7 @@ module Breacan
       proxy
       middleware
       serializer
+      auto_paginate
     )
 
     attr_accessor(*OPTIONS_KEYS)
@@ -47,6 +48,7 @@ module Breacan
       @proxy              = ENV['BREACAN_PROXY']
       @middleware         = default_builder
       @serializer         = default_serializer
+      @auto_paginate      = !!ENV['BREACAN_AUTO_PAGINATE']
 
       self
     end
