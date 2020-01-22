@@ -62,7 +62,13 @@ module Breacan
           r = request :get, url, parse_query_and_convenience_headers(options.merge({cursor: nextc}))
           if r.is_a?(Sawyer::Resource)
             res ||= {}
-            res.to_hash.deep_merge!(r.to_hash)
+            res = res.deep_merge(r) do |key, this_val, other_val|
+              if this_val.is_a?(Array) && other_val.is_a?(Array)
+                this_val + other_val
+              else
+                other_val
+              end
+            end
           elsif r.is_a?(Array)
             res ||= []
             res.concat(r)
