@@ -33,7 +33,7 @@ module Breacan
         get 'groups.leave', query: args
       end
 
-      def groups_list(args=nil)
+      def groups_list(args = nil)
         get 'groups.list', query: args
 
       end

@@ -50,6 +50,11 @@ module Breacan
     end
 
     def get(url, options = {})
+      return get_with_auto_paginate(url, options) if auto_paginate
+      request :get, url, parse_query_and_convenience_headers(options)
+    end
+
+    def get_with_auto_paginate(url, options = {})
       res = nil
       if url.end_with?('.list')
         nextc = nil
