@@ -1,4 +1,6 @@
 require 'sawyer'
+require 'active_support'
+require 'active_support/core_ext/hash'
 require 'breacan/configurable'
 require 'breacan/authentication'
 require 'breacan/client/api'
@@ -48,7 +50,35 @@ module Breacan
     end
 
     def get(url, options = {})
-      request :get, url, parse_query_and_convenience_headers(options)
+      res = nil
+      if url.end_with?('.list')
+        nextc = nil
+        loop do
+          r = request :get, url, parse_query_and_convenience_headers(options.merge({cursor: nextc}))
+          if r.is_a?(Sawyer::Resource)
+            res ||= {}
+            res.to_hash.deep_merge!(r.to_hash)
+          elsif r.is_a?(Array)
+            res ||= []
+            res.concat(r)
+          else
+            raise "unknown response type"
+          end
+
+          if r.respond_to?(:response_metadata)
+            if r.response_metadata.next_cursor == ""
+              res = Sawyer::Resource.new(Sawyer::Agent.new(api_endpoint), res)
+              break
+            end
+            nextc = r.response_metadata.next_cursor
+          else
+            break
+          end
+        end
+      else
+        res = request :get, url, parse_query_and_convenience_headers(options)
+      end
+      res
     end
 
     def post(url, options = {})
