@@ -34,7 +34,7 @@ module Breacan
         get 'channels.leave', query: args
       end
 
-      def channels_list(args=nil)
+      def channels_list(args = nil)
         get 'channels.list', query: args
       end
       alias_method :channels, :channels_list
