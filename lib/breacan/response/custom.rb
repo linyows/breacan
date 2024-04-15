@@ -3,7 +3,11 @@ require 'breacan/error'
 
 module Breacan
   module Response
-    class Custom < Faraday::Response::Middleware
+    # NOTE: Since faraday v.2, `Faraday::Response::Middleware` has been removed. We can use `Faraday::Middleware` instead.
+    # ref: https://github.com/lostisland/faraday/blob/c9cc1b30ecebcd57beffa67d275f68742b5b05c5/UPGRADING.md?plain=1#L128
+    middleware_base = defined?(Faraday::Response::Middleware) ? Faraday::Response::Middleware : Faraday::Middleware
+
+    class Custom < middleware_base
       private
 
       def on_complete(res)
