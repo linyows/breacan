@@ -3,8 +3,6 @@ name: Ruby Gem
 on:
   push:
     branches: [ "master" ]
-  pull_request:
-    branches: [ "master" ]
 
 jobs:
   build:
@@ -25,18 +23,27 @@ jobs:
         ruby-version: 3
 
     - name: Publish to GPR
+      id: gpr
       run: |
         mkdir -p $HOME/.gem
         touch $HOME/.gem/credentials
         chmod 0600 $HOME/.gem/credentials
         printf -- "---\n:github: ${GEM_HOST_API_KEY}\n" > $HOME/.gem/credentials
         gem build *.gemspec
-        gem push --KEY github --host https://rubygems.pkg.github.com/${OWNER} *.gem
+        VERSION=$(gem spec *.gem version | grep version | awk '{print $2}')
+        EXISTS=$(gem search ^breacan$ -a | grep -c $VERSION)
+        if [ $EXISTS -eq 0 ]; then
+          gem push --KEY github --host https://rubygems.pkg.github.com/${OWNER} *.gem
+        else
+          echo "Gem with the same version already exists. Skipping push..."
+          echo "skip_publish_to_rubygems=true" >> $GITHUB_OUTPUT
+        fi
       env:
         GEM_HOST_API_KEY: "Bearer ${{secrets.GITHUB_TOKEN}}"
         OWNER: ${{ github.repository_owner }}
 
     - name: Publish to RubyGems
+      if: ${{ steps.gpr.outputs.skip_publish_to_rubygems != 'true' }}
       run: |
         mkdir -p $HOME/.gem
         touch $HOME/.gem/credentials
