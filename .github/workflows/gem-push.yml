@@ -38,7 +38,7 @@ jobs:
           gem push --KEY github --host https://rubygems.pkg.github.com/${OWNER} *.gem
         else
           echo "Gem with the same version already exists. Skipping push..."
-          echo "skip_publish_to_rubygems::true" >> $GITHUB_OUTPUT
+          echo "skip_publish_to_rubygems=true" >> $GITHUB_OUTPUT
         fi
       env:
         GEM_HOST_API_KEY: "Bearer ${{secrets.GITHUB_TOKEN}}"
